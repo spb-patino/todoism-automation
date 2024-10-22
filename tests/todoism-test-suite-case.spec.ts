@@ -21,12 +21,27 @@ test.describe('Todoism test suit cases', () => {
     });
 
     test('Create a new task', async ({ page }) => {
-        const toDoAppPage: TodoAppPage = new TodoAppPage(page);
-        
+        const toDoAppPage = new TodoAppPage(page);
         await toDoAppPage.addTaskToList();
         const taskText = await toDoAppPage.getGeneratedTaskText();        
         expect(taskText).toBe(toDoAppPage.getTaskText());
-        
+    });
+    
+    test('Create a task and mark as completed', async ({ page }) => {
+        const toDoAppPage = new TodoAppPage(page);
+        await toDoAppPage.addTaskToList();
+        await toDoAppPage.markTaskAsCompleted();
+        const isTaskCompleted = await toDoAppPage.getIfTaskIsCompleted();
+        expect(isTaskCompleted).toBeTruthy();
+    });
+    
+    test('Clear task list', async ({ page }) => {
+        const toDoAppPage = new TodoAppPage(page);
+        await toDoAppPage.addTaskToList();
+        await toDoAppPage.markTaskAsCompleted();
+        await toDoAppPage.clearTaskList();
+        const isTaskRemoved = await toDoAppPage.getIfTaskIsRemoved();
+        expect(isTaskRemoved).toBeTruthy(); 
     });
 
 });
