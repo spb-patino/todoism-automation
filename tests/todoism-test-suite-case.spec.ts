@@ -7,6 +7,7 @@ import { TodoAppPage } from '../pages/todo-app.page';
 test.describe('Todoism test suit cases', () => {
     
     test.beforeEach(async ({ page }) => {
+        test.slow();
         const homePage: HomePage = new HomePage(page);
         const loginPage: LoginPage = new LoginPage(page);
 
@@ -21,6 +22,7 @@ test.describe('Todoism test suit cases', () => {
     });
 
     test('Create a new task', async ({ page }) => {
+        test.slow();
         const toDoAppPage = new TodoAppPage(page);
         await toDoAppPage.addTaskToList();
         const taskText = await toDoAppPage.getGeneratedTaskText();        
@@ -28,6 +30,7 @@ test.describe('Todoism test suit cases', () => {
     });
     
     test('Create a task and mark as completed', async ({ page }) => {
+        test.slow();
         const toDoAppPage = new TodoAppPage(page);
         await toDoAppPage.addTaskToList();
         await toDoAppPage.markTaskAsCompleted();
@@ -36,6 +39,7 @@ test.describe('Todoism test suit cases', () => {
     });
     
     test('Clear task list', async ({ page }) => {
+        test.slow();
         const toDoAppPage = new TodoAppPage(page);
         await toDoAppPage.addTaskToList();
         await toDoAppPage.markTaskAsCompleted();
