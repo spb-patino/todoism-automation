@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class LoginPage{
 
@@ -20,6 +20,7 @@ export class LoginPage{
 
     clickGetATestAccount = async () => {
         await this.getATestAccountButton.click();        
+        await expect(this.userNameInput).not.toBeEmpty();
     }
 
     clickLoginButton = async () => {

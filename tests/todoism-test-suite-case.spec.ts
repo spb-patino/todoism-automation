@@ -1,6 +1,7 @@
 import test, { expect } from '@playwright/test';
 import { HomePage } from '../pages/home.page';
 import { LoginPage } from '../pages/login.page';
+import { TodoAppPage } from '../pages/todo-app.page';
 
 
 test.describe('Todoism test suit cases', () => {
@@ -20,9 +21,12 @@ test.describe('Todoism test suit cases', () => {
     });
 
     test('Create a new task', async ({ page }) => {
-        test.slow();
-
-        expect(true).toBeTruthy();
+        const toDoAppPage: TodoAppPage = new TodoAppPage(page);
+        
+        await toDoAppPage.addTaskToList();
+        const taskText = await toDoAppPage.getGeneratedTaskText();        
+        expect(taskText).toBe(toDoAppPage.getTaskText());
+        
     });
 
 });
