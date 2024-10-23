@@ -37,8 +37,8 @@ export class TodoAppPage {
         return await completedTaskCheckbox.isVisible();
     }
 
-    async getIfTaskIsRemoved(taskText: string): Promise<boolean> {
-        const COMPLETED_TASK_SELECTOR = this.getCompletedTaskSelector(taskText);
+    async getIfTaskIsRemoved(): Promise<boolean> {
+        const COMPLETED_TASK_SELECTOR = this.getCompletedTaskSelector();
         await this.page.waitForSelector(COMPLETED_TASK_SELECTOR, { state: 'detached' });
         const elementExistsCount = await this.page.locator(COMPLETED_TASK_SELECTOR).count();
         return !elementExistsCount;
@@ -56,8 +56,11 @@ export class TodoAppPage {
         await this.taskInput.press('Enter');
     }
 
-    private getCompletedTaskSelector(taskText: string): string {
-        return `//span[@class = "inactive-item" and contains(., "${taskText}")]`;
+    private getCompletedTaskSelector(taskText?: string): string {
+        if (taskText) {
+            return `//span[@class = "inactive-item" and contains(., "${taskText}")]`;
+        }
+        return `//span[@class = "inactive-item"]`;
     }
 
 }

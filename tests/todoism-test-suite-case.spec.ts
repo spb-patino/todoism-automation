@@ -14,12 +14,8 @@ test.describe('Todoism test suit cases', () => {
 
         await homePage.openPage();
         await homePage.clickLoginButton();
-
         await loginPage.clickGetATestAccount();
         await loginPage.clickLoginButton();
-
-
-
     });
 
     test('Create a new task', async ({ page }) => {
@@ -45,7 +41,7 @@ test.describe('Todoism test suit cases', () => {
         await toDoAppPage.addTaskToList(taskToUse);
         await toDoAppPage.markTaskAsCompleted(taskToUse);
         await toDoAppPage.clearTaskList();
-        const isTaskRemoved = await toDoAppPage.getIfTaskIsRemoved(taskToUse);
+        const isTaskRemoved = await toDoAppPage.getIfTaskIsRemoved();
         expect(isTaskRemoved).toBeTruthy(); 
     });
 
